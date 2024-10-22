@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup/Login</title>
+</head>
+<body>
+    <h2>Signup/Login</h2>
+    <form>
+        <input type="email" id="email" placeholder="Enter Email" required><br>
+        <input type="password" id="password" placeholder="Enter Password" required><br>
+        <button type="button" id="action-btn" onclick="handleAuthAction()">Signup</button>
+    </form>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBJZnRHABu7umoTFm0H1_mJN_o2PZEhRs",
+            authDomain: "nutriscan-d0624.firebaseapp.com",
+            projectId: "nutriscan-d0624",
+            storageBucket: "nutriscan-d0624.appspot.com",
+            messagingSenderId: "621654025167",
+            appId: "1:621654025167:web:491eec7458d40a4181a8ba",
+            measurementId: "G-2MQPS4C01V"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        function signupUser() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(() => {
+                    alert('Signup successful! Please log in.');
+                    document.getElementById('action-btn').innerHTML = 'Login';
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        }
+
+        function loginUser() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => {
+                    window.location.href = "/home";
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        }
+
+        window.handleAuthAction = function() {
+            const actionText = document.getElementById('action-btn').innerHTML;
+            if (actionText === 'Signup') {
+                signupUser();
+            } else {
+                loginUser();
+            }
+        };
+    </script>
+</body>
+</html>
