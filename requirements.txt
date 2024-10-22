@@ -1,0 +1,5 @@
+Django==4.2.1
+gunicorn==20.1.0
+Pillow==9.5.0  # for handling images
+pytesseract==0.3.10  # for OCR with Tesseract
+whitenoise==6.4.0  # to serve static files
