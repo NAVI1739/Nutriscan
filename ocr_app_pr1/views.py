@@ -17,7 +17,7 @@ def upload_and_scan_image(request):
         if not uploaded_file:
             return JsonResponse({'error': 'No file uploaded'}, status=400)
 
-        # Create a path in the media directory
+        # Create a path in the media directorys
         file_name = uploaded_file.name
         file_path = default_storage.save(f'temp/{file_name}', ContentFile(uploaded_file.read()))
 
